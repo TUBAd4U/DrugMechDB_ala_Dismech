@@ -109,3 +109,18 @@ _site
 
 # mypy
 .mypy_cache/
+.venv/
+.venv-py310/
+
+.claude/settings.local.json
+.claude/cache/
+.env
+.env.local
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.DS_Store
+.idea/
+.vscode/
+*.swp
