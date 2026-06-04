@@ -1,0 +1,148 @@
+[
+  {
+    "pair_id": "P01",
+    "drug": "Aspirin",
+    "disease": "Myocardial Infarction",
+    "drug_class": "cardiovascular",
+    "disease_area": "cardiovascular",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P01.yaml"
+  },
+  {
+    "pair_id": "P02",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P03",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P04",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P05",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P06",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P07",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P08",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P09",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P10",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P11",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P12",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P13",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P14",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P15",
+    "drug": "Acyclovir",
+    "disease": "Herpes Simplex",
+    "drug_class": "antimicrobial",
+    "disease_area": "infectious",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P15.yaml"
+  },
+  {
+    "pair_id": "P16",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P17",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P18",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P19",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P20",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P21",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P22",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P23",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P24",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P25",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P26",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P27",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P28",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P29",
+    "status": "no_output"
+  },
+  {
+    "pair_id": "P30",
+    "status": "no_output"
+  }
+]
