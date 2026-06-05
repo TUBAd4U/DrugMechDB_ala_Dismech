@@ -1,6 +1,6 @@
 # Phase 3 Evaluation — Sample selection methodology
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §6 Phase 3](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §6 Phase 3](PRD_v3.md)
 **Date:** May 2026
 **Pair list (machine-readable):** [phase3_eval_pairs.yaml](phase3_eval_pairs.yaml)
 

@@ -1,6 +1,6 @@
 # Phase 1 Validation Report
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §6 Phase 1](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §6 Phase 1](PRD_v3.md)
 **Date:** May 2026
 **Schema:** [`src/drugmechdb/schema/drugmechdb.yaml`](../src/drugmechdb/schema/drugmechdb.yaml), validating against class `MechanisticPath`
 **Files validated:** 4,846 (every file under `kb/paths/` except `_index.yaml`)

@@ -4,7 +4,7 @@ This file is the single source of truth for what an AI agent must do when curati
 
 **Audience:** every Claude Code session invoking `/curate` or `/backfill`. Read this file in full before drafting any path YAML.
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §5.1](../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §5.1](docs/PRD_v3.md)
 
 ---
 

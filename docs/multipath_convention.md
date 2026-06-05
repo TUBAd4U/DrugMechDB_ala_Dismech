@@ -1,6 +1,6 @@
 # Multi-Path-per-File Convention
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §4.1, §7 Open Q #2](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §4.1, §7 Open Q #2](PRD_v3.md)
 **Date:** May 2026
 **Status:** Confirmed — kept as default for v3
 

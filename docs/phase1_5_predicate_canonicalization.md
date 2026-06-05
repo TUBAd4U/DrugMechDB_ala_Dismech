@@ -1,6 +1,6 @@
 # Phase 1.5 Report — Predicate Canonicalization
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §6 Phase 1.5](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §6 Phase 1.5](PRD_v3.md)
 **Date:** May 2026
 **Status:** Complete — exit criterion met without rewriting any path files
 

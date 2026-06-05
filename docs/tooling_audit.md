@@ -1,7 +1,7 @@
 # Tooling Audit — DrugMechDB AI Curation Phase 1
 
 **Audit date:** May 2026
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §3.3](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §3.3](PRD_v3.md)
 
 This document inventories the existing scripts in the repository and decides — for each one — whether it is **kept**, **retired**, or **archived** under the v3 AI curation platform.
 

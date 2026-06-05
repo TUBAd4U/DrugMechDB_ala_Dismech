@@ -1,6 +1,6 @@
 # Phase 2 Report — Validation Tooling
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §6 Phase 2](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §6 Phase 2](PRD_v3.md)
 **Date:** May 2026
 **Status:** Complete — all exit criteria met
 

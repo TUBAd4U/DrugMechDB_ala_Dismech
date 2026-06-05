@@ -1,6 +1,6 @@
 # Phase 3 Report — Agent Prompts & Skills
 
-**PRD reference:** [DrugMechDB_AI_Curation_PRD_v3.md §6 Phase 3](../../DrugMechDB_AI_Curation_PRD_v3.md)
+**PRD reference:** [PRD v3 §6 Phase 3](PRD_v3.md)
 **Date:** May 2026
 **Status:** **Infrastructure complete + 2-pair demonstration; full 30-pair eval is a runnable but not-yet-run gate.**
 
