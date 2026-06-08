@@ -182,6 +182,12 @@ Concretely: **MeSH label drift is completely unassessed**, and **InterPro/Pfam/r
 occurrences) were not validated at all.** A future pass should resolve MeSH labels (UMLS/NLM), InterPro/Pfam (EBI APIs),
 and Reactome (Reactome ContentService) to close the ~70% of unique IDs this audit could only spot-check or tabulate.
 
+> **➡ This gap is now closed — see the companion report [`mesh_node_drift_report.md`](mesh_node_drift_report.md)**
+> (+ [`drift_audit_mesh.json`](drift_audit_mesh.json)). It resolves every non-OBO ID against its own authority, taking
+> node-layer coverage from 29.5% → **99.9%**. Headline: the node IDs are largely sound (~89% resolve + current + name-OK;
+> only ~3.5% have a hard validity problem — notably 93 retired MeSH **drug** SCRs; MeSH **disease** IDs are 100% current),
+> and the apparent name drift is mostly benign labeling — the opposite of the predicate finding below.
+
 This audit also **does not** re-litigate the 230 prefix violations + 1,768 legacy-prefix warnings already documented in
 `phase2_gap_report.md` (those are prefix↔label mismatches; this audit is about *term validity* given the stored ID).
 
