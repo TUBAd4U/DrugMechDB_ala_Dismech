@@ -18,55 +18,224 @@
   },
   {
     "pair_id": "P02",
-    "status": "no_output"
+    "drug": "Atorvastatin",
+    "disease": "Hypercholesterolemia",
+    "drug_class": "cardiovascular",
+    "disease_area": "cardiovascular",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P02.yaml"
   },
   {
     "pair_id": "P03",
-    "status": "no_output"
+    "drug": "Lisinopril",
+    "disease": "Hypertension",
+    "drug_class": "cardiovascular",
+    "disease_area": "cardiovascular",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P03.yaml"
   },
   {
     "pair_id": "P04",
-    "status": "no_output"
+    "drug": "Metoprolol",
+    "disease": "Heart Failure",
+    "drug_class": "cardiovascular",
+    "disease_area": "cardiovascular",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P04.yaml"
   },
   {
     "pair_id": "P05",
-    "status": "no_output"
+    "drug": "Clopidogrel",
+    "disease": "Stroke",
+    "drug_class": "cardiovascular",
+    "disease_area": "cardiovascular",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P05.yaml"
   },
   {
     "pair_id": "P06",
-    "status": "no_output"
+    "drug": "Tamoxifen",
+    "disease": "Breast Cancer",
+    "drug_class": "oncology",
+    "disease_area": "cancer",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P06.yaml"
   },
   {
     "pair_id": "P07",
-    "status": "no_output"
+    "drug": "Imatinib",
+    "disease": "Chronic Myeloid Leukemia",
+    "drug_class": "oncology",
+    "disease_area": "cancer",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P07.yaml"
   },
   {
     "pair_id": "P08",
-    "status": "no_output"
+    "drug": "Cetuximab",
+    "disease": "Colorectal Cancer",
+    "drug_class": "oncology",
+    "disease_area": "cancer",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P08.yaml"
   },
   {
     "pair_id": "P09",
-    "status": "no_output"
+    "drug": "Methotrexate",
+    "disease": "Acute Lymphoblastic Leukemia",
+    "drug_class": "oncology",
+    "disease_area": "cancer",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P09.yaml"
   },
   {
     "pair_id": "P10",
-    "status": "no_output"
+    "drug": "Trastuzumab",
+    "disease": "HER2-positive Breast Cancer",
+    "drug_class": "oncology",
+    "disease_area": "cancer",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P10.yaml"
   },
   {
     "pair_id": "P11",
-    "status": "no_output"
+    "drug": "Rifampicin",
+    "disease": "Pulmonary Tuberculosis",
+    "drug_class": "antimicrobial",
+    "disease_area": "infectious",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P11.yaml"
   },
   {
     "pair_id": "P12",
-    "status": "no_output"
+    "drug": "Isoniazid",
+    "disease": "Pulmonary Tuberculosis",
+    "drug_class": "antimicrobial",
+    "disease_area": "infectious",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P12.yaml"
   },
   {
     "pair_id": "P13",
-    "status": "no_output"
+    "drug": "Vancomycin",
+    "disease": "MRSA Infection",
+    "drug_class": "antimicrobial",
+    "disease_area": "infectious",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P13.yaml"
   },
   {
     "pair_id": "P14",
-    "status": "no_output"
+    "drug": "Oseltamivir",
+    "disease": "Influenza",
+    "drug_class": "antimicrobial",
+    "disease_area": "infectious",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P14.yaml"
   },
   {
     "pair_id": "P15",
@@ -87,62 +256,257 @@
   },
   {
     "pair_id": "P16",
-    "status": "no_output"
+    "drug": "Levodopa",
+    "disease": "Parkinson's Disease",
+    "drug_class": "cns",
+    "disease_area": "neurological",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P16.yaml"
   },
   {
     "pair_id": "P17",
-    "status": "no_output"
+    "drug": "Fluoxetine",
+    "disease": "Major Depressive Disorder",
+    "drug_class": "cns",
+    "disease_area": "neurological",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P17.yaml"
   },
   {
     "pair_id": "P18",
-    "status": "no_output"
+    "drug": "Lithium",
+    "disease": "Bipolar Disorder",
+    "drug_class": "cns",
+    "disease_area": "neurological",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P18.yaml"
   },
   {
     "pair_id": "P19",
-    "status": "no_output"
+    "drug": "Gabapentin",
+    "disease": "Epilepsy",
+    "drug_class": "cns",
+    "disease_area": "neurological",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P19.yaml"
   },
   {
     "pair_id": "P20",
-    "status": "no_output"
+    "drug": "Donepezil",
+    "disease": "Alzheimer's Disease",
+    "drug_class": "cns",
+    "disease_area": "neurological",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P20.yaml"
   },
   {
     "pair_id": "P21",
-    "status": "no_output"
+    "drug": "Methotrexate",
+    "disease": "Rheumatoid Arthritis",
+    "drug_class": "immunomodulator",
+    "disease_area": "autoimmune",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P21.yaml"
   },
   {
     "pair_id": "P22",
-    "status": "no_output"
+    "drug": "Infliximab",
+    "disease": "Crohn's Disease",
+    "drug_class": "immunomodulator",
+    "disease_area": "autoimmune",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P22.yaml"
   },
   {
     "pair_id": "P23",
-    "status": "no_output"
+    "drug": "Hydroxychloroquine",
+    "disease": "Systemic Lupus Erythematosus",
+    "drug_class": "immunomodulator",
+    "disease_area": "autoimmune",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P23.yaml"
   },
   {
     "pair_id": "P24",
-    "status": "no_output"
+    "drug": "Mycophenolate Mofetil",
+    "disease": "Lupus Nephritis",
+    "drug_class": "immunomodulator",
+    "disease_area": "autoimmune",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P24.yaml"
   },
   {
     "pair_id": "P25",
-    "status": "no_output"
+    "drug": "Adalimumab",
+    "disease": "Psoriasis",
+    "drug_class": "immunomodulator",
+    "disease_area": "autoimmune",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P25.yaml"
   },
   {
     "pair_id": "P26",
-    "status": "no_output"
+    "drug": "Metformin",
+    "disease": "Type 2 Diabetes Mellitus",
+    "drug_class": "endocrine",
+    "disease_area": "metabolic",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P26.yaml"
   },
   {
     "pair_id": "P27",
-    "status": "no_output"
+    "drug": "Insulin",
+    "disease": "Type 1 Diabetes Mellitus",
+    "drug_class": "endocrine",
+    "disease_area": "metabolic",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P27.yaml"
   },
   {
     "pair_id": "P28",
-    "status": "no_output"
+    "drug": "Levothyroxine",
+    "disease": "Hypothyroidism",
+    "drug_class": "endocrine",
+    "disease_area": "metabolic",
+    "existing_in_corpus": false,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P28.yaml"
   },
   {
     "pair_id": "P29",
-    "status": "no_output"
+    "drug": "Allopurinol",
+    "disease": "Gout",
+    "drug_class": "endocrine",
+    "disease_area": "metabolic",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P29.yaml"
   },
   {
     "pair_id": "P30",
-    "status": "no_output"
+    "drug": "Empagliflozin",
+    "disease": "Type 2 Diabetes Mellitus",
+    "drug_class": "endocrine",
+    "disease_area": "metabolic",
+    "existing_in_corpus": true,
+    "status": "scored",
+    "overall_pass": true,
+    "per_layer": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "output_path": "tests/phase3_eval_outputs/P30.yaml"
   }
 ]
