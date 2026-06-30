@@ -34,6 +34,26 @@ qc-layer N *ARGS:
 qc-json *ARGS:
     {{PY}} scripts/qc.py --json {{ARGS}}
 
+# Post-QC structural quality analysis (deterministic, no LLM). Reports a quality
+# profile + flags; it is a scorer, NOT a pass/fail gate. Run after `just qc` is green.
+quality *ARGS:
+    {{PY}} scripts/quality/structural_quality.py {{ARGS}}
+
+# Machine-readable per-file structural quality JSON.
+quality-json *ARGS:
+    {{PY}} scripts/quality/structural_quality.py --json {{ARGS}}
+
+# Full quality profile: QC gate + structural + (if a judge API key is set) the
+# semantic LLM judges, merged into one profile per record. Deterministic layers
+# always run; semantic layers are marked "not run" without a key. See
+# scripts/quality/judge/README.md. Use --no-llm to force deterministic-only.
+quality-profile *ARGS:
+    {{PY}} scripts/quality/quality_profile.py {{ARGS}}
+
+# Machine-readable quality profile JSON.
+quality-profile-json *ARGS:
+    {{PY}} scripts/quality/quality_profile.py --json {{ARGS}}
+
 # Phase-1 / 1.5 maintenance helpers (one-shot data cleanups).
 normalize:
     {{PY}} scripts/phase1_normalize_paths.py --dry-run

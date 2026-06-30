@@ -114,6 +114,9 @@ _site
 
 .claude/settings.local.json
 .claude/cache/
+
+# Quality judge local artifacts (grounding + verdict caches) — reproducible, not source
+quality_cache/
 .env
 .env.local
 __pycache__/
@@ -124,3 +127,13 @@ __pycache__/
 .idea/
 .vscode/
 *.swp
+
+# --- Fresh-repo excludes (next-gen DrugMechDB) ---
+# Pre-rendered matplotlib pathographs (818 MB, one PNG per record). The revamp
+# renders the pathograph client-side from kb/paths/, so these are not source.
+images/
+# Drift-audit scratch (145 MB: caches, bmt install log, intermediate JSON). The
+# finished audit *reports* live in docs/ and are kept; this working dir is not.
+audit_work/
+# Local research dossiers / large data dumps that are reproducible, not source
+*.zip

@@ -10,9 +10,11 @@ This file is the single source of truth for what an AI agent must do when curati
 
 ## 0. The one rule that overrides every other rule
 
-**Every edge in an AI-curated path must carry at least one `EvidenceItem` whose `snippet` is a verbatim substring of the cited PubMed abstract.** No paraphrasing. No ellipses. No whitespace normalization beyond what the cached abstract already has. If you can't find a verbatim snippet, you can't add the edge.
+**Every edge in an AI-curated path must carry at least one `EvidenceItem` whose `snippet` is a verbatim substring of the cited source's cached text** — its PubMed **abstract** by default, or its **open-access full text** when you escalate (see §4.4). No paraphrasing. No fabrication. If you can't find a verbatim snippet in the cached source, you can't add the edge.
 
-If you find yourself rewording, summarizing, or "improving" an abstract sentence — stop. Pick a different sentence, or drop the edge.
+The matcher (`linkml-reference-validator`) normalizes whitespace, case, and punctuation before comparing and supports a `...` multi-part operator — treat that as a safety net for messy full-text prose, **not** a license to paraphrase (see §4.5).
+
+If you find yourself rewording, summarizing, or "improving" a source sentence — stop. Pick a different sentence, or drop the edge.
 
 **Corollary for external research providers.** When the `/curate` skill is invoked with `using <provider>` (see §5 step 3), the provider returns a *dossier* with proposed PMIDs and a narrative mechanism summary. The dossier is **advisory only**:
 - Snippets the dossier quotes are NOT acceptable evidence sources. The only acceptable source for `EvidenceItem.snippet` is the PubMed-cached abstract written by `scripts/pubmed_fetch.py`.
@@ -118,8 +120,9 @@ Read the file; the descriptions distinguish near-synonyms (e.g. `regulates` vs `
 
 ### 4.1 What counts as evidence
 
-- A `PMID:xxxxxxxx` whose abstract appears in PubMed E-utilities (English language, public access).
-- The `snippet` is an **exact substring** of the cached abstract. The `linkml-reference-validator` does whitespace-tolerant matching (collapses runs of whitespace), but does *not* accept paraphrases, summaries, or translations.
+- A `PMID:xxxxxxxx` whose **abstract** appears in PubMed E-utilities (English language, public access).
+- When the abstract is insufficient for an edge, the **open-access full text** of the same PMID, fetched via `pubmed_fetch.py fetch --fulltext` (see §4.4). Full text is pulled only from the redistribution-permissive PMC open-access subset.
+- The `snippet` is a substring of the cached source under the matcher's normalization (whitespace/case/punctuation-tolerant, with an optional `...` multi-part operator). It does **not** accept paraphrases, summaries, or translations.
 
 ### 4.2 What does NOT count
 
@@ -147,7 +150,24 @@ Read the file; the descriptions distinguish near-synonyms (e.g. `regulates` vs `
 
 If you can't tell, pick `OTHER` and put your reasoning in `explanation`.
 
-### 4.4 Snippet picking tactics
+### 4.4 Abstract-first; escalate to full text only when needed
+
+Reading full text costs tokens and time, so **default to the abstract** and escalate per *edge*, not per paper:
+
+1. **Try the abstract first.** If a verbatim sentence in the cached abstract supports the edge, use it — done.
+2. **If not, triage before escalating** — two cheap checks decide whether full text is worth fetching:
+   - *On-topic?* Is the paper actually about this edge (abstract discusses the drug/target/mechanism but doesn't state this specific step)? If it's simply the wrong source, **pick a different PMID** — don't read its body.
+   - *Available?* `pubmed_fetch.py probe PMID:x --json` — one metadata call, no download. `fulltext_available: true` (open-access only) → escalate. If `error` is set, that's *unknown* (network) — retry, don't read it as "unavailable."
+3. **Escalate only when on-topic AND available:** `pubmed_fetch.py fetch PMID:x --fulltext` upgrades that PMID's cache to `content_type: full_text` (abstract prepended). Re-read it and snippet from the body. `--max-fulltext N` caps escalations per run.
+4. **If full text still doesn't support the edge**, record `NO_EVIDENCE` or drop it — never paraphrase.
+
+**Operators (full text, sparingly).** When an unavoidable inline-citation artifact splits the sentence you want, the matcher's `...` quotes the two clean halves: `snippet: "aspirin acetylates ... cyclooxygenase 1"`; `[...]` drops an editorial insert. Prefer a single contiguous sentence when one exists.
+
+**Read the context before accepting a full-text match.** A substring hit can land in a *negated/refuted* sentence (use `REFUTE`/`WRONG_STATEMENT`/`NO_EVIDENCE`, not `SUPPORT`) or in a sentence about a *different drug* in a multi-drug paper (confirm the subject is your entity). Bibliographies and raw table cells are excluded from the cached body, so a match won't come from a reference list.
+
+**Sourcing note.** Escalation currently allows full text of *any* open-access article — broader than the conservative-sourcing rule (which favors secondary sources that *assert* an established mechanism) and pending Su's sign-off before a large run. See the project `CLAUDE.md` §Flags and the `dmdb-references` skill.
+
+### 4.5 Snippet picking tactics
 
 - Prefer the **shortest** verbatim sentence that supports the edge unambiguously.
 - If the abstract uses the inverse phrasing (`X reduces activity of Y`), that supports a `decreases activity of` edge.
@@ -227,7 +247,7 @@ Granted (PRD §5.1.1, extended for Phase 4b research providers):
   - `python scripts/research.py …` — only when the user invoked `/curate` with `using <provider>`. Do not run research speculatively.
   - `linkml-validate …` for spot-checks
   - `git status` / `git diff` for awareness; do **not** run `git commit`, `git push`, or destructive git commands.
-- **HTTP — direct from the curation agent:** **only `eutils.ncbi.nlm.nih.gov`** via the `pubmed_fetch.py` wrapper. The wrapper enforces rate limiting and writes to the cache. No `WebFetch` to arbitrary domains. PubMed is the sole sanctioned external source the curation agent itself contacts.
+- **HTTP — direct from the curation agent:** only via the `pubmed_fetch.py` wrapper, the trusted boundary that rate-limits (per host) and writes the cache. The wrapper contacts `eutils.ncbi.nlm.nih.gov` (PubMed abstracts + efetch-pmc), `www.ebi.ac.uk` (Europe PMC full text + availability probe), and `www.ncbi.nlm.nih.gov` (PubTator3 full text). The agent never calls these hosts directly and never `WebFetch`es arbitrary domains — only the wrapper. The wrapper also writes `references_cache/`, which is **script-write-only** (a pre-edit hook blocks the agent from editing it), so the agent cannot author the source text Layer 4 trusts.
 - **HTTP — via research providers:** `scripts/research.py` provides a separate, narrower allowance. When invoked with `using <provider>`, it makes provider-specific API calls (e.g. `api.anthropic.com` for `claude`, `api.openai.com` for `openai`) entirely encapsulated inside the script. The agent never sees the provider's HTTP endpoints directly; it only reads the dossier written to `research/`. This split means a future provider can be added without expanding the curation agent's network surface.
 
 Not granted:

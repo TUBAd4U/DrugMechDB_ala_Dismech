@@ -36,11 +36,34 @@ links:
 1. **Fetch the source into the cache first** (the validator reads `references_cache/`):
    - `.venv-py310/bin/python scripts/pubmed_fetch.py search "<query>"`
    - `.venv-py310/bin/python scripts/pubmed_fetch.py fetch PMID:12345678`
-   This writes `references_cache/PMID_12345678.md`.
-2. **Copy the snippet verbatim** from that cached abstract into the edge.
-3. **Validate offline** (deterministic, no network):
+   This writes `references_cache/PMID_12345678.md` (the abstract).
+   **You may not hand-edit `references_cache/` — it is script-write-only (a pre-edit hook
+   blocks Edit/Write there). That is what makes the verbatim check trustworthy: the agent
+   cannot author the source text it later cites.**
+2. **Escalate to full text only if the abstract is insufficient for an edge** (not by default):
+   - `pubmed_fetch.py probe PMID:12345678 --json` — is open-access full text available? (no download)
+   - `pubmed_fetch.py fetch PMID:12345678 --fulltext` — upgrade the cache to `content_type:
+     full_text` (abstract prepended), then snippet from the body. See AGENTS.md §4.4.
+3. **Copy the snippet verbatim** from that cached source (abstract or full text) into the edge.
+4. **Validate offline** (deterministic, no network):
    `just qc-layer 4 kb/paths/<file>.yaml` or `just qc <file>` — Layer 4 runs `--offline`
    against the committed cache. The pre-edit hook does the same on every write.
+
+## Matcher operators & full-text guards
+
+The matcher normalizes whitespace, case, and punctuation, and supports two operators —
+handy when snippeting messy full-text prose, but use them sparingly:
+
+- `...` — order-independent multi-part match. Bridge an unavoidable inline-citation artifact:
+  `snippet: "aspirin acetylates ... cyclooxygenase 1"`.
+- `[...]` — drop an editorial insert from the query.
+
+When snippeting **full text**, read the surrounding context before setting `supports`:
+- A substring hit may sit in a **negated/refuted** sentence → `REFUTE` / `WRONG_STATEMENT` /
+  `NO_EVIDENCE`, not `SUPPORT`.
+- In a **multi-drug** paper, confirm the matched sentence's subject is *your* drug/entity.
+- Bibliographies and raw table cells are excluded from the cached body, so a match won't
+  come from a reference list.
 
 ## Source-policy note (read before scaling)
 
@@ -51,3 +74,9 @@ while Su's steer to us is to cite the **secondary source that asserts the establ
 mechanism** (DrugBank MoA, reviews) and bars primary-literature reconstruction. Confirm
 the evidence-source policy with Jayden + Su before a large backfill/forwardfill run.
 Until then, keep snippets verbatim and the `reference` honest about its source.
+
+Full-text escalation currently allows *any* open-access article (broader than
+secondary-source-only) and commits the fetched body to the cache. Full text comes from the
+redistribution-permissive PMC open-access subset, but some carry non-commercial (`cc by-nc`)
+licenses — flagged for Su. The fetcher records each source's `license` in the cache
+frontmatter for audit.

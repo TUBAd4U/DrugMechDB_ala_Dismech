@@ -80,6 +80,25 @@ If step 4 was skipped, run the search step yourself and pick 5–15 PMIDs that l
 
 Abstracts land in `references_cache/PMID_*.md`. **Read each one fully** before drafting — extracting the right verbatim snippet later depends on having the abstract in your context now. Drop dossier-proposed PMIDs that turn out to be irrelevant or unsupportive after you read them; the dossier is not authoritative.
 
+### 5.5 Escalate to full text only when an abstract is insufficient
+
+For an edge where no cached **abstract** has a verbatim supporting sentence, decide — per edge — whether to read full text. Don't read full text by default; it's slower and usually unnecessary.
+
+1. **Is the paper on-topic for this edge?** If the abstract shows the paper isn't about this step, pick a different PMID instead of reading its body.
+2. **Is open-access full text available?** Cheap check, no download:
+   ```
+   .venv-py310/bin/python scripts/pubmed_fetch.py probe PMID:xxx --json
+   ```
+   `fulltext_available: true` → escalate. `error:` set → unknown (network), retry. Otherwise stay on the abstract.
+3. **Escalate (on-topic AND available):**
+   ```
+   .venv-py310/bin/python scripts/pubmed_fetch.py fetch PMID:xxx --fulltext
+   ```
+   This upgrades `references_cache/PMID_xxx.md` to `content_type: full_text` (abstract prepended). Re-read it, then snippet from the body. Cap with `--max-fulltext N` so you don't over-read.
+4. If full text still has no verbatim supporting sentence, record `NO_EVIDENCE` or drop the edge — never paraphrase.
+
+See AGENTS.md §4.4 for the `...`/`[...]` operators and the read-the-context guards (negation, wrong-drug, no bibliography matches).
+
 ### 6. Draft the path YAML
 
 - Start the path at the drug node (`label: Drug`, prefix `MESH` or `DB`).
@@ -89,7 +108,7 @@ Abstracts land in `references_cache/PMID_*.md`. **Read each one fully** before d
   - `key`: pick from the canonical 67 in `src/drugmechdb/schema/biolink_predicates.yaml`.
   - `evidence`: ≥1 `EvidenceItem` with:
     - `reference: PMID:xxxxxxxx`
-    - `snippet:` **verbatim** substring of the cached abstract — copy/paste from `references_cache/`, never from the dossier.
+    - `snippet:` **verbatim** substring of the cached source (abstract, or full text if you escalated in step 5.5) — copy/paste from `references_cache/`, never from the dossier.
     - `supports: SUPPORT` (the default) or `PARTIAL` if the abstract is about a closely-related-but-different claim.
     - `evidence_source: HUMAN_CLINICAL | MODEL_ORGANISM | IN_VITRO | COMPUTATIONAL | OTHER` — describes the cited paper's methodology, not yours.
 
@@ -141,6 +160,6 @@ Final message to the user must include:
 
 - File writes: `kb/paths/`, `references_cache/`, and `research/` only. **Don't** modify the schema, scripts, or other paths.
 - Bash: only the commands listed in AGENTS.md §6 (which includes `scripts/research.py`).
-- Network: PubMed via `scripts/pubmed_fetch.py`. External research providers via `scripts/research.py` (which itself makes provider-specific API calls — but only when explicitly invoked). **No WebFetch** to arbitrary domains.
+- Network: PubMed abstracts + open-access full text via `scripts/pubmed_fetch.py` (it contacts NCBI, Europe PMC, and PubTator3 — see AGENTS.md §6). External research providers via `scripts/research.py` (provider-specific API calls, only when explicitly invoked). **No WebFetch** to arbitrary domains.
 - The research dossier is **advisory**. Snippets, claims, and PMIDs from the dossier are all unverified until you confirm them against the cached PubMed abstract. Treat the dossier the way a careful reviewer treats a literature search result, not the way a citation manager treats a curated entry.
 - If you find yourself wanting to paraphrase an abstract sentence to make a snippet "cleaner," stop — pick a different sentence instead. Layer 4 will reject paraphrases.

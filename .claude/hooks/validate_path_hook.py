@@ -55,6 +55,9 @@ QC_SCRIPT = REPO / "scripts" / "qc.py"
 # Only records under this directory are gated.
 PATHS_MARKER = "kb/paths"
 
+# references_cache/ is script-write-only — see the fence in main().
+CACHE_MARKER = "references_cache"
+
 
 def simulate_edit(file_path: Path, old_string: str, new_string: str) -> str | None:
     """Return the file content after an Edit, or None if it can't be simulated."""
@@ -124,6 +127,23 @@ def main() -> None:
         sys.exit(0)
 
     file_path = Path(file_path_str)
+
+    # Hard fence: references_cache/ is script-write-only (scripts/pubmed_fetch.py).
+    # The agent must never author or alter the source text that Layer 4 trusts —
+    # otherwise a hallucinated snippet could "match" a fabricated source. The
+    # fetch script writes the cache via the filesystem, not via Edit/Write, so it
+    # is unaffected by this block. (Placed before the venv check so the fence
+    # holds even on an un-bootstrapped clone.)
+    if CACHE_MARKER in str(file_path):
+        print("=" * 64, file=sys.stderr)
+        print("BLOCKED: references_cache/ is script-write-only.", file=sys.stderr)
+        print(f"  file: {file_path}", file=sys.stderr)
+        print("Populate it with:", file=sys.stderr)
+        print("  python scripts/pubmed_fetch.py fetch [--fulltext] PMID:x", file=sys.stderr)
+        print("Do not hand-edit cached references — Layer 4's verbatim-snippet", file=sys.stderr)
+        print("check depends on their integrity.", file=sys.stderr)
+        print("=" * 64, file=sys.stderr)
+        sys.exit(2)
 
     # Only gate per-record path files; skip the generated index.
     if PATHS_MARKER not in str(file_path) or file_path.suffix != ".yaml":

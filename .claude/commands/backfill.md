@@ -44,13 +44,24 @@ For each edge in the file, draft a focused query targeting the source-target rel
 
 Read each fetched abstract. Find the **verbatim sentence** that supports this specific edge's claim. Copy it as-is.
 
+### 3.5 Escalate to full text only when an abstract is insufficient
+
+If an edge has no verbatim supporting sentence in any cached **abstract**, decide per edge whether to read full text (don't do it by default):
+
+```
+.venv-py310/bin/python scripts/pubmed_fetch.py probe PMID:xxx --json     # available? (no download)
+.venv-py310/bin/python scripts/pubmed_fetch.py fetch PMID:xxx --fulltext # escalate if on-topic + available
+```
+
+`fetch --fulltext` upgrades the cache to `content_type: full_text` (abstract prepended); re-read it and snippet from the body. If full text still doesn't support the edge, use `NO_EVIDENCE` (step 5) — never paraphrase. See AGENTS.md §4.4.
+
 ### 4. Add evidence in place
 
 Edit the file to add an `evidence:` list on each edge. Preserve all existing fields. Do not reorder or re-key. Each `EvidenceItem`:
 
 ```yaml
 - reference: PMID:xxxxxxxx
-  snippet: "<verbatim substring from cached abstract>"
+  snippet: "<verbatim substring from cached source: abstract or full text>"
   supports: SUPPORT          # or PARTIAL, NO_EVIDENCE (see below)
   evidence_source: <bucket>
   explanation: ""            # optional curator note
